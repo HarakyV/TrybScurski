@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css" />
+	<title>TRYB SCURSKI STRONA OFICJALNA</title>
+	<style>
+		img {
+			position: absolute;
+			transform: scale(0.7); /* zmniejszenie obrazków o 70% */
+			opacity: 0; /* ukrycie obrazków */
+			transition: opacity 0.5s; /* płynne pojawianie się obrazków */
+		}
+
+		button {
+			display: block;
+			margin: 0 auto;
+			font-size: 2em;
+			padding: 20px 40px;
+		}
+	</style>
+</head>
+<body>
+	<button onclick="aktywujTrybScurski()">KLIKNIJ TUTAJ ABY AKTYWOWAC TRYB SCURSKI</button>
+	<h1 id="informacjaGra">KLIKAJ NA SCZURY ABY DOSTAWAC PUNKTY</h1>
+
+	<audio id="myAudio">
+		<source src="music1.mp3" type="audio/mpeg">
+		Twoja przeglądarka nie obsługuje elementu audio.
+	</audio>
+
+	<p id="points-counter"></p> <!-- add new element to display points -->
+
+	<script>
+		var points = 0; // create points variable
+
+		function aktywujTrybScurski() {
+			
+			
+			/* zmiana koloru tła body */
+			setInterval(function() {
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+			}, 100); /* zmiana co 0.1 sekundy */
+
+			/* tworzenie obrazków co 0.1 sekundy */
+			setInterval(function() {
+				var img = document.createElement('img');
+				var randomImg = Math.floor(Math.random() * 3) + 1;
+				img.src = 'scur' + randomImg + '.gif';
+				img.style.top = Math.random() * window.innerHeight + 'px';
+				img.style.left = Math.random() * window.innerWidth + 'px';
+				document.body.appendChild(img);
+				img.style.opacity = 1; /* pojawienie się obrazka */
+
+				/* add click event listener to each img element to increment points */
+				img.addEventListener('click', function() {
+					points++;
+					pointsCounter.textContent = 'Punkty: ' + points;
+                    this.remove();
+                    console.log("Scur Klikniety")
+					if (points % 100 === 0) {
+						alert("Osiągnąłeś " + points + " punktów!");
+					}
+    
+ 
+				});
+
+				img.dataset.created = new Date(); // add timestamp to img data attribute
+
+				/* usunięcie obrazków, które pojawiły się przed więcej niż 10 sekund temu */
+				setTimeout(function() {
+					document.querySelectorAll('img').forEach(function(img) {
+						if (new Date() - new Date(img.dataset.created) > 10000) {
+							img.remove();
+						}
+					});
+				}, 1000); /* co 1 sekundę sprawdź, czy trzeba usunąć obrazki */
+			}, 100); /* co 0.1 sekundy twórz nowe obrazki */
+
+			/* odtwarzanie muzyki */
+			var audio = document.getElementById("myAudio");
+			audio.play();
+			var pointsCounter = document.getElementById('points-counter'); // get points counter element
+
+		}
+
+	</script>
+</body>
+
+</html>

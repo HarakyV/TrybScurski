@@ -1,0 +1,67 @@
+img {
+  position: absolute;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#aktywuj {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  font-size: 24px;
+  background-color: #ff00ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#aktywuj:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+body {
+  background-color: #000000;
+  transition: background-color 0.1s;
+}
+
+
+#points-counter {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 20px;
+font-size: 30px;
+background-color: #000000;
+color: #ffffff;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+transition: transform 0.5s;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+#informacjaGra {
+left: 30%;
+text-align: center;
+position: absolute;
+top: 150px;
+color: #ff00ff; 
+padding: 20px;
+font-size: 30px;
+background-color: #ffffff;
+color: #000000;
+border: none;
+border-radius: 50px;
+
+transition: transform 0.5s;
+
+
+}
